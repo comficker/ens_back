@@ -18,7 +18,7 @@ class Command(BaseCommand):
                 "name": "Ethereum Name Service"
             }
         )
-        file = open('/Users/hoanganhlam/WebstormProjects/crawl-nft/data_fixed/{}.txt'.format(options['q']), 'r')
+        file = open(options['q'], 'r')
         lines = file.readlines()
         count = 0
         start = True
