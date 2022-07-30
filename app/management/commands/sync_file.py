@@ -45,10 +45,10 @@ class Command(BaseCommand):
                 print(transactionHash)
                 name = name[:32]
             a, is_created = Asset.objects.get_or_create(
-                contract=contract,
-                name=name.replace("\x00", ""),
                 item_id=item_id,
                 defaults={
+                    "contract": contract,
+                    "name": name.replace("\x00", ""),
                     "tx_hashes": [transactionHash],
                     "mint_date": timestamp
                 }
@@ -76,11 +76,3 @@ class Command(BaseCommand):
                 t.save()
             a.save()
         print(count)
-# 9456759|
-# 0x4605808100386cfd319b663a80f92a0712f9ed34a8c0f5783a77632f68766981
-# |22|
-# 4play|
-# 0x950b9c3f72c4a6b9bfde6e77cdf0d41a7599b7305dcd1e4f65116346f1f149da|
-# 0xD53d5eA1C50CAe08bf29566bB9060b88146e7c40|
-# 22335759995597450|
-# 1612915685

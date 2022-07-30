@@ -22,7 +22,7 @@ class Contract(models.Model):
 
 class Asset(models.Model):
     contract = models.ForeignKey(Contract, related_name="assets", on_delete=models.CASCADE)
-    item_id = models.CharField(max_length=500)
+    item_id = models.CharField(max_length=500, db_index=True)
     uri = models.CharField(max_length=500, null=True, blank=True)
 
     name = models.CharField(max_length=500)
@@ -40,7 +40,7 @@ class Asset(models.Model):
 
 class Transaction(models.Model):
     timestamp = models.DateTimeField(null=True, blank=True)
-    tx_hash = models.CharField(max_length=256)
+    tx_hash = models.CharField(max_length=256, db_index=True)
 
     asset = models.ForeignKey(Asset, related_name="transactions", on_delete=models.CASCADE)
     event_name = models.CharField(max_length=50)
@@ -59,4 +59,3 @@ class Report(models.Model):
     created = models.DateField()
     minted = models.IntegerField(default=0)
     trade = models.IntegerField(default=0)
-
