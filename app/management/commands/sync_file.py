@@ -26,7 +26,7 @@ class Command(BaseCommand):
             count = count + 1
             text = line.strip()
             arr = text.split("|")
-            timestamp = datetime.datetime.fromtimestamp(int(arr[0]), timezone.timezone.utc)
+            timestamp = datetime.datetime.fromtimestamp(int(arr[0]), timezone.timezone.utc) if arr[0] != '' else None
             blockNumber = arr[1]
             transactionHash = arr[2]
             transactionIndex = arr[3]
@@ -70,7 +70,7 @@ class Command(BaseCommand):
                     "timestamp": timestamp
                 }
             )
-            if tx_created:
+            if tx_created and timestamp:
                 t, r_created = Report.objects.get_or_create(created=timestamp.date())
                 t.minted = t.minted + 1
                 t.save()
