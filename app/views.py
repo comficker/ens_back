@@ -1,5 +1,6 @@
 import json
 import base64
+import datetime
 from rest_framework import viewsets
 from rest_framework import generics
 from rest_framework import status
@@ -15,7 +16,8 @@ from app.models import Asset, Contract, Transaction, Report
 from eth_account.messages import defunct_hash_message
 from web3 import Web3
 from collections import OrderedDict
-
+from django.utils import timezone
+from app.helper import save_line
 
 class Pagination(PageNumberPagination):
     page_size_query_param = 'page_size'
@@ -125,3 +127,21 @@ def update_trait(request):
     m_json = json.loads(decoded)
     if address == request.wallet.address and m_json.get("id"):
         return Response({}, status=status.HTTP_201_CREATED)
+
+
+@api_view(['POST'])
+def push_data(request):
+    if "HOANGLAMBK57XYZ" == request.data.get("pwd"):
+        contract, _ = Contract.objects.get_or_create(
+            address="0x57f1887a8bf19b14fc0df6fd9b2acc9af147ea85",
+            chain_id="ethereum",
+            defaults={
+                "name": "Ethereum Name Service"
+            }
+        )
+        msg = request.data.get("message")
+        lines = msg.split("\n")
+        for line in lines:
+            save_line(line, contract)
+        return Response(status=status.HTTP_201_CREATED)
+    return Response(status=status.HTTP_400_BAD_REQUEST)
