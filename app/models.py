@@ -36,6 +36,7 @@ class Asset(models.Model):
     expired_date = models.DateTimeField(null=True, blank=True)
     tx_hashes = models.JSONField(null=True, blank=True)
     current_price = models.FloatField(default=0)
+    last_block = models.IntegerField(default=0, db_index=True)
 
 
 class Transaction(models.Model):

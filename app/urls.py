@@ -13,4 +13,5 @@ urlpatterns = [
     path(r'', include(router.urls)),
     path(r'update-trait', views.update_trait),
     path(r'push-data', views.push_data),
+    path(r'last-block', views.get_last_block),
 ]

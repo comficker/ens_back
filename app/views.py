@@ -145,3 +145,10 @@ def push_data(request):
             save_line(line, contract)
         return Response(status=status.HTTP_201_CREATED)
     return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET'])
+def get_last_block(request):
+    return Response({
+        "last_block": Asset.objects.order_by('-last_block').first().last_block
+    })

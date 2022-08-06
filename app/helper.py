@@ -30,6 +30,7 @@ def save_line(line, contract):
     )
     if expires:
         a.expired_date = datetime.datetime.fromtimestamp(int(expires), timezone.timezone.utc)
+    a.last_block = int(arr[1])
     a.current_price = cost
     a.owner = owner
     if transactionHash not in a.tx_hashes:
