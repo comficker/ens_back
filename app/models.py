@@ -2,6 +2,12 @@ from django.db import models
 
 
 # Create your models here.
+class HashTag(models.Model):
+    name = models.CharField(max_length=500)
+    id_string = models.CharField(max_length=500)
+    desc = models.CharField(max_length=500, null=True, blank=True)
+    meta = models.JSONField(null=True, blank=True)
+
 
 class Contract(models.Model):
     chain_id = models.CharField(max_length=50, default="eth")
@@ -37,6 +43,8 @@ class Asset(models.Model):
     tx_hashes = models.JSONField(null=True, blank=True)
     current_price = models.FloatField(default=0)
     last_block = models.IntegerField(default=0, db_index=True)
+
+    hash_tags = models.ManyToManyField(HashTag, related_name="assets", blank=True)
 
 
 class Transaction(models.Model):

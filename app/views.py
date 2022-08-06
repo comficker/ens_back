@@ -1,6 +1,5 @@
 import json
 import base64
-import datetime
 from rest_framework import viewsets
 from rest_framework import generics
 from rest_framework import status
@@ -8,16 +7,16 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.utils.urls import remove_query_param, replace_query_param
 from rest_framework.pagination import PageNumberPagination
+from rest_framework.filters import OrderingFilter, SearchFilter
 from django_filters import rest_framework as filters
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework.filters import OrderingFilter, SearchFilter
 from app import serializers
 from app.models import Asset, Contract, Transaction, Report
+from app.helper import save_line
 from eth_account.messages import defunct_hash_message
 from web3 import Web3
 from collections import OrderedDict
-from django.utils import timezone
-from app.helper import save_line
+
 
 class Pagination(PageNumberPagination):
     page_size_query_param = 'page_size'

@@ -1,5 +1,7 @@
 import datetime
+import requests
 from app.models import Asset, Transaction, Report
+from app.serializers import AssetSerializer
 from django.utils import timezone
 
 
@@ -50,4 +52,9 @@ def save_line(line, contract):
         t, r_created = Report.objects.get_or_create(created=timestamp.date())
         t.minted = t.minted + 1
         t.save()
+    requests.post('https://signal.enshunt.com/', json={
+        "pwd": "NINOFATHER",
+        "channel": "new_register",
+        "msg": AssetSerializer(a).data
+    })
     a.save()
