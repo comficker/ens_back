@@ -148,6 +148,7 @@ def push_data(request):
 
 @api_view(['GET'])
 def get_last_block(request):
+    instance = Asset.objects.order_by('-last_block').first()
     return Response({
-        "last_block": Asset.objects.order_by('-last_block').first().last_block
+        "last_block": instance.last_block if instance is not None else 9380471
     })
