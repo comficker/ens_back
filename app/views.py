@@ -150,5 +150,5 @@ def push_data(request):
 def get_last_block(request):
     instance = Asset.objects.order_by('-last_block').first()
     return Response({
-        "last_block": instance.last_block if instance is not None else 14889491
+        "last_block": instance.last_block if instance is not None else 9380471
     })
