@@ -7,7 +7,7 @@ from django.utils import timezone
 
 def save_line(line, contract):
     text = line.strip()
-    arr = text.split("|")
+    arr = text.split("//|//")
     if len(arr) < 7:
         return
     timestamp = datetime.datetime.fromtimestamp(int(arr[0]), timezone.timezone.utc) if arr[0] != '' else None
