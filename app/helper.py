@@ -17,7 +17,7 @@ def save_line(line, contract):
     owner = arr[6]
     cost = arr[7]
     expires = arr[8]
-    if not label:
+    if not label or label == '':
         return
     item_id = int(label, 16)
     if len(name) > 500:
