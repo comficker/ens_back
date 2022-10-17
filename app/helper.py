@@ -17,9 +17,9 @@ def save_line(line, contract):
     owner = arr[6]
     cost = arr[7]
     expires = arr[8]
-    item_id = int(label, 16)
-    if not item_id:
+    if not label:
         return
+    item_id = int(label, 16)
     if len(name) > 500:
         print(transactionHash)
         name = name[:32]
